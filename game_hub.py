@@ -1,6 +1,48 @@
 from itertools import count
 import random
 
+def guessfunc():
+
+    print("\n*------------------------------------------------------------------------*")
+    print("|Welcome to Guess the Number!, pick a number from 1 to 10, you get 3 trys|")
+    print("*------------------------------------------------------------------------*\n")
+    randomizer = random.randint(1, 10)
+    count = 0
+
+    while True:
+        
+        guess = input("Your Guess: ")
+        count += 1
+
+        if guess.isdigit():
+            guess = int(guess)
+            if guess <= 0:
+                print("\n0 is not a valid number, please pick a number from 1 to 10")
+        else:
+            print("\n'{}' is not a digit, try again".format(guess))
+            guessfunc()
+                
+        if guess == randomizer:
+            choice = input("\nWow, you got it! Want to play again? Y/N: ")
+            if choice.lower() == "y":
+                guessfunc()
+            else:
+                break
+        else:
+            if guess < randomizer:
+                print("Oof! too low\n")
+            elif guess > randomizer:
+                print("Oof! too high\n")
+
+            if count == 3:
+                print("Number: {}".format(randomizer))
+                choice = input("\nTough luck, all out of guesses, the number was {}! Play again? Y/N: ".format(randomizer))
+                if choice.lower() == "y":
+                    guessfunc()
+                else:
+                    break          
+
+
 def rpc():
     print("\n|---------------------------------------------|")
     print("|Welcome to Rock, Paper, Scissors, lets begin!|")
@@ -63,6 +105,7 @@ def rpc():
                 rpc()
             else:
                 break
+            
 
 def quiz():
 
@@ -131,7 +174,7 @@ while answer:
     elif answer == "2":
         rpc()
     elif answer == "3":
-        print("Lets guees that number!")
+        guessfunc()
     elif answer == "4":
         print("4")
     elif answer == "5":
