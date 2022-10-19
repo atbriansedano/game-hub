@@ -164,8 +164,7 @@ def main():
         1. Take a Quiz
         2. Play Rock, Paper, Scissors
         3. Guess the Number
-        4. Tik Tak Toe
-        5. Exit
+        4. Exit
         """.format(name))
         answer = input("Your choice: ")
 
@@ -176,12 +175,11 @@ def main():
         elif answer == "3":
             guessfunc()
         elif answer == "4":
-            print("4")
-        elif answer == "5":
             break
         else:
-            print("lets play tik tak toe!")
-
+            print("Error: Invalid input")
+            main()
+            
     print("\nThank you for playing {}, Goodbye!".format(name))
 
 main()
