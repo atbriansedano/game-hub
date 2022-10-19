@@ -12,7 +12,6 @@ def guessfunc():
     while True:
         
         guess = input("Your Guess: ")
-        count += 1
 
         if guess.isdigit():
             guess = int(guess)
@@ -21,26 +20,27 @@ def guessfunc():
         else:
             print("\n'{}' is not a digit, try again".format(guess))
             guessfunc()
+
+        count += 1
+
+        if guess < randomizer:
+            print("Oof! too low\n")
+        elif guess > randomizer:
+                print("Oof! too high\n")
                 
         if guess == randomizer:
-            choice = input("\nWow, you got it! Want to play again? Y/N: ")
+            choice = input("\nWow, you got it! the number was {}. Want to play again? Y/N: ".format(randomizer))
             if choice.lower() == "y":
                 guessfunc()
-            else:
-                break
-        else:
-            if guess < randomizer:
-                print("Oof! too low\n")
-            elif guess > randomizer:
-                print("Oof! too high\n")
+            break 
+        
+        elif count == 3:
 
-            if count == 3:
-                print("Number: {}".format(randomizer))
-                choice = input("\nTough luck, all out of guesses, the number was {}! Play again? Y/N: ".format(randomizer))
-                if choice.lower() == "y":
-                    guessfunc()
-                else:
-                    break          
+            choice = input("\nTough luck, all out of guesses, the number was {}! Play again? Y/N: ".format(randomizer))
+
+            if choice.lower() == "y":
+                guessfunc()
+            break
 
 
 def rpc():
@@ -97,14 +97,12 @@ def rpc():
             choice = input("Congradulations! the human race lives another day. Play again? Y/N: ")
             if choice.lower() == "y":
                 rpc()
-            else:
-                break
+            break
         elif losses == 3:
             choice = input("Its Over! Singularity is now here, might as well give up... Try again? Y/N: ")
             if choice.lower() == "y":
                 rpc()
-            else:
-                break
+            break
             
 
 def quiz():
@@ -141,7 +139,7 @@ def quiz():
     if count > 6:
         print("Congradulations! you have passed the test with a score of {}/10".format(count))
         play = input("Play again Y/N: ")
-        if play.lower == 'y':
+        if play.lower() == 'y':
             quiz()
         else:
             exit
@@ -154,32 +152,36 @@ def quiz():
             exit
 
 
-name = input("Welcome! Please enter your name: ")
+def main():
 
-answer = True
-while answer:
-    print("""
-    Hello, {}! please choose an activity:
+    name = input("Welcome! Please enter your name: ")
 
-    1. Take a Quiz
-    2. Play Rock, Paper, Scissors
-    3. Guess the Number
-    4. Tik Tak Toe
-    5. Exit
-    """.format(name))
-    answer = input("Your choice: ")
+    answer = True
+    while answer:
+        print("""
+        Hello, {}! please choose an activity:
 
-    if answer == "1":
-        quiz()
-    elif answer == "2":
-        rpc()
-    elif answer == "3":
-        guessfunc()
-    elif answer == "4":
-        print("4")
-    elif answer == "5":
-        break
-    else:
-        print("lets play tik tak toe!")
+        1. Take a Quiz
+        2. Play Rock, Paper, Scissors
+        3. Guess the Number
+        4. Tik Tak Toe
+        5. Exit
+        """.format(name))
+        answer = input("Your choice: ")
 
-print("\nThank you for playing {}, Goodbye!".format(name))
+        if answer == "1":
+            quiz()
+        elif answer == "2":
+            rpc()
+        elif answer == "3":
+            guessfunc()
+        elif answer == "4":
+            print("4")
+        elif answer == "5":
+            break
+        else:
+            print("lets play tik tak toe!")
+
+    print("\nThank you for playing {}, Goodbye!".format(name))
+
+main()
